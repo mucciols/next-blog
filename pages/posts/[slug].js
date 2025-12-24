@@ -1,9 +1,19 @@
 import Head from "next/head";
 import { getPost } from "../../lib/posts";
 
-export async function getStaticProps() {
-  console.log("[FirstPostPage] getStaticProps()");
-  const post = await getPost('first-post');
+export async function getStaticPaths() { 
+  return {
+    paths: [
+      { params: { slug: 'first-post' } },
+      { params: { slug: 'second-post' } },
+    ],
+    fallback: false
+  }
+}
+
+export async function getStaticProps({ params: { slug } }) {
+  console.log('[PostPage] getStaticProps(): ', slug);
+  const post = await getPost(slug);
   return {
     props: {
       post,
@@ -11,7 +21,7 @@ export async function getStaticProps() {
   };
 }
 
-function FirstPostPage({ post }) {
+function PostPage({ post }) {
   console.log("[FirstPostPage] render:", post);
   return (
     <>
@@ -27,4 +37,4 @@ function FirstPostPage({ post }) {
   );
 }
 
-export default FirstPostPage;
+export default PostPage;
