@@ -1,14 +1,12 @@
-import { readFile } from 'fs/promises'
 import Head from "next/head";
+import { getPost } from "../../lib/posts";
 
 export async function getStaticProps() {
-  // console.log("[FirstPostPage] getStaticProps()");
-  const data = await readFile('content/posts/first-post.json', 'utf-8');
-  const post = JSON.parse(data);
-  
+  console.log("[FirstPostPage] getStaticProps()");
+  const post = await getPost('first-post');
   return {
     props: {
-      post
+      post,
     },
   };
 }
@@ -18,11 +16,11 @@ function FirstPostPage({ post }) {
   return (
     <>
       <Head>
-        <title>{ post.title }</title>
+        <title>{post.title}</title>
       </Head>
       <main>
-        <h1>{ post.title }</h1>
-        <p>{ post.body }</p>
+        <h1>{post.title}</h1>
+        <p>{post.body}</p>
       </main>
     </>
   );
