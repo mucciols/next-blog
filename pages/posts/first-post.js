@@ -1,17 +1,26 @@
 import Head from "next/head";
 
-function FirstPostPage() {
-  console.log("[About] render");
+export async function getStaticProps() {
+  return {
+    props: {
+      post: {
+        title: 'First Post',
+        body: 'My First post, as static props'
+      },
+    },
+  };
+}
+
+function FirstPostPage({ post }) {
+  console.log("[FirstPostPage] render:", post);
   return (
     <>
       <Head>
-        <title>My Blog - FirstPostPage</title>
+        <title>{ post.title }</title>
       </Head>
       <main>
-        <h1>First Post </h1>
-        <p>
-          this is my first ever blog post! 
-        </p>
+        <h1>{ post.title }</h1>
+        <p>{ post.body }</p>
       </main>
     </>
   );
