@@ -2,11 +2,12 @@
   "name": "next-blog",
   "private": true,
   "scripts": {
-    "build" : "next build",
-    "dev" : "next dev",
+    "build": "next build",
+    "dev": "next dev",
     "start": "next start"
   },
   "dependencies": {
+    "marked": "^17.0.1",
     "next": "^16.1.1",
     "react": "^19.2.3",
     "react-dom": "^19.2.3"
